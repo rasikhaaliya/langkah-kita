@@ -337,147 +337,141 @@ const App = () => {
   };
 
   const ProfileView = () => (
-    <div className="space-y-6 animate-in fade-in duration-500 pb-16">
-      <h2 className="text-2xl font-black" style={{ color: colors.forest }}>Profile</h2>
-      <div className="flex flex-col items-center py-2 space-y-3">
-          <div className="relative">
-            <div className="w-24 h-24 rounded-[32px] border-4 border-white shadow-xl flex items-center justify-center overflow-hidden" style={{ backgroundColor: colors.forest }}>
-              <User size={40} style={{ color: colors.mint }} />
-            </div>
-            <div className="absolute -bottom-1 -right-1 p-1.5 bg-white rounded-full shadow-lg border border-gray-50">
-              <ShieldCheck size={18} style={{ color: colors.emerald }} />
-            </div>
-          </div>
-          <div className="text-center"><h3 className="text-xl font-black" style={{ color: colors.forest }}>{userName}</h3><p className="text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mt-1.5" style={{ backgroundColor: colors.forest, color: colors.mint }}>Consistency Sprout 🌱</p></div>
+    <div className="space-y-8 animate-in fade-in duration-500 pb-20">
+      <div className="flex justify-between items-center"><h2 className="text-2xl font-black text-forest">Profile</h2><Settings size={24} className="text-gray-300" /></div>
+      <div className="flex flex-col items-center py-4 space-y-4">
+          <div className="relative"><div className="w-28 h-28 rounded-[40px] border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden" style={{ backgroundColor: colors.forest }}><User size={48} style={{ color: colors.mint }} /></div><div className="absolute -bottom-2 -right-2 p-2 bg-white rounded-2xl shadow-lg border border-gray-50"><ShieldCheck size={20} style={{ color: colors.emerald }} /></div></div>
+          <div className="text-center"><h3 className="text-2xl font-black text-forest">{userName}</h3><p className="text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full mt-1" style={{ backgroundColor: colors.forest, color: colors.mint }}>Consistency Sprout 🌱</p></div>
       </div>
-      <div className="bg-white p-6 rounded-[36px] border border-gray-100 shadow-sm space-y-6">
-          <div className="flex items-center gap-3"><Heart size={18} style={{ color: colors.rose }} /><h4 className="text-xs font-black uppercase tracking-widest" style={{ color: colors.forest }}>Mental Vitality</h4></div>
-          <div className="flex justify-between items-end h-28 px-1 gap-3">
+      <div className="bg-white p-7 rounded-[40px] border border-gray-100 shadow-sm space-y-8">
+          <div className="flex items-center gap-3"><Heart size={20} style={{ color: colors.rose }} /><h4 className="text-sm font-black uppercase tracking-widest text-forest">Mental Vitality Trends</h4></div>
+          <div className="flex justify-between items-end h-32 px-2 gap-4">
             {[45, 70, 30, 85, 95, 60, 75].map((h, i) => (
               <div key={i} className="flex-1 flex flex-col items-center h-full justify-end group">
-                <div 
-                  className="w-full rounded-t-lg transition-all duration-700 ease-out border-2" 
-                  style={{ height: `${h}%`, backgroundColor: colors.mint, borderColor: colors.forest, opacity: 0.9, borderBottom: 'none' }} 
-                />
-                <span className="text-[8px] font-black text-gray-300 mt-2 uppercase">D{i+1}</span>
+                <div className="w-full rounded-t-xl transition-all duration-700 ease-out border-2" style={{ height: `${h}%`, backgroundColor: colors.mint, borderColor: colors.forest, borderBottom: 'none' }} />
+                <span className="text-[9px] font-black text-gray-400 mt-3 uppercase tracking-tighter">D{i+1}</span>
               </div>
             ))}
           </div>
-          <p className="text-[10px] text-center italic text-gray-400 font-medium px-2 leading-relaxed">"Consistency is the secret to growth."</p>
+          <p className="text-[11px] text-center italic text-gray-400 font-medium px-4">"Balance is the secret to a long journey."</p>
       </div>
-      <button onClick={() => {setIsLoggedIn(false); setView('opening');}} className="w-full py-4 font-black text-xs bg-rose-50 rounded-[24px] hover:bg-rose-100 transition-colors" style={{ color: colors.rose }}>Sign Out</button>
+      <button onClick={() => {setIsLoggedIn(false); setView('opening');}} className="w-full py-5 text-rose-500 font-bold text-sm bg-rose-50 rounded-[28px] hover:bg-rose-100 transition-colors">Sign Out</button>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-white font-sans relative overflow-hidden flex justify-center">
+    <div className="h-screen bg-gray-200 font-sans flex justify-center items-center overflow-hidden">
       
-      {/* Container Utama (Tanpa Phone Frame) */}
-      <div className="w-full max-w-md flex flex-col relative bg-white">
+      {/* MOBILE APP CONTAINER - FIX SCROLL & PANEL */}
+      <div className="w-full max-w-[375px] h-full bg-white relative flex flex-col shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden border-x border-gray-100">
         
-        {/* Notifikasi Poin Mengambang */}
+        {/* Floating Notification */}
         {showPointAnim && (
-          <div className="absolute top-16 right-6 z-[250] animate-bounce text-white px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 border-2" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
-             <div className="p-1 rounded-full" style={{ backgroundColor: colors.mint }}><Plus size={12} style={{ color: colors.forest }} /></div>
-             <span className="font-black text-[11px] tracking-tight">+50 Kita Points</span>
+          <div className="absolute top-16 right-6 z-[250] animate-bounce text-white px-5 py-3 rounded-3xl shadow-2xl flex items-center gap-3 border-2" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
+             <div className="p-1 rounded-full" style={{ backgroundColor: colors.mint }}><Plus size={14} style={{ color: colors.forest }} /></div>
+             <span className="font-black text-sm tracking-tight">+50 Kita Points</span>
           </div>
         )}
 
-        <div className="flex-1 overflow-y-auto scrollbar-hide">
+        {/* SCROLLABLE MAIN CONTENT */}
+        <div className="flex-1 overflow-y-auto scrollbar-hide bg-white px-6 pt-12 pb-32">
           {view === 'opening' && <OpeningScreen />}
           {view === 'auth' && <AuthScreen />}
           
-          <div className="px-6 pt-10 pb-32">
-            {isLoggedIn && (
-              <>
-                {view === 'dashboard' && <Dashboard />}
-                {view === 'rewards' && <RewardsView />}
-                {view === 'profile' && <ProfileView />}
-              </>
-            )}
-            
-            {view === 'journal' && (
-              <div className="space-y-6 py-2 animate-in slide-in-from-bottom-10 duration-500">
-                <div className="flex items-center gap-4"><button onClick={() => setView('dashboard')} className="p-2.5 bg-gray-50 rounded-2xl active:scale-90 transition-all" style={{ color: colors.forest }}><ArrowLeft size={20} /></button><h2 className="text-2xl font-black" style={{ color: colors.forest }}>Mental Log</h2></div>
-                
-                <div className="p-6 rounded-[32px] space-y-2 border" style={{ backgroundColor: colors.mint + '60', borderColor: colors.mint }}>
-                    <div className="flex items-center gap-2" style={{ color: colors.forest }}><Sparkles size={16} /><p className="text-[10px] font-black uppercase tracking-widest">Mindfulness</p></div>
-                    <p className="text-xs font-semibold leading-relaxed italic" style={{ color: colors.forest }}>"Your mind deserves as much care as your body."</p>
-                </div>
-
-                {/* PILIH MOOD */}
-                <div className="flex justify-around py-2">
-                  {[
-                    { id: 'happy', icon: <Smile size={32} />, label: 'Good', hex: colors.emerald },
-                    { id: 'neutral', icon: <Meh size={32} />, label: 'Okay', hex: colors.orange },
-                    { id: 'exhausted', icon: <Frown size={32} />, label: 'Sad', hex: colors.rose }
-                  ].map((mood) => (
-                    <button 
-                      key={mood.id} 
-                      onClick={() => setSelectedMood(mood.id)} 
-                      className={`p-6 rounded-[36px] border-2 transition-all shadow-md flex flex-col items-center gap-2 active:scale-95 ${
-                        selectedMood === mood.id ? 'text-white' : 'bg-white text-gray-400 border-gray-100'
-                      }`}
-                      style={{ 
-                        backgroundColor: selectedMood === mood.id ? mood.hex : colors.white,
-                        borderColor: selectedMood === mood.id ? mood.hex : undefined
-                      }}
-                    >
-                        {React.cloneElement(mood.icon, { 
-                          style: { color: selectedMood === mood.id ? colors.mint : undefined } 
-                        })}
-                        <span className={`text-[9px] font-black uppercase tracking-widest ${selectedMood === mood.id ? 'text-white' : 'text-gray-400'}`}>{mood.label}</span>
-                    </button>
-                  ))}
-                </div>
-
-                <textarea 
-                  value={journalText} 
-                  onChange={(e) => setJournalText(e.target.value)} 
-                  placeholder='How are you feeling today?' 
-                  className="w-full h-36 p-6 rounded-[32px] bg-gray-50 border-2 border-transparent focus:bg-white outline-none text-xs font-medium leading-relaxed transition-all shadow-inner" 
-                />
-
-                <button 
-                  onClick={handleJournalSubmit} 
-                  className={`w-full py-5 rounded-[32px] text-white font-black text-lg shadow-xl active:scale-95 transition-all flex items-center justify-center gap-3 ${!selectedMood ? 'opacity-30 cursor-not-allowed' : ''}`}
-                  style={{ backgroundColor: !selectedMood ? '#D1D5DB' : colors.forest }}
-                  disabled={!selectedMood}
-                >
-                    <ShieldCheck size={24} style={{ color: colors.mint }} /> 
-                    <span>Save Reflection</span>
-                </button>
+          {isLoggedIn && (
+            <>
+              {view === 'dashboard' && <Dashboard />}
+              {view === 'rewards' && <RewardsView />}
+              {view === 'profile' && <ProfileView />}
+            </>
+          )}
+          
+          {view === 'journal' && (
+            <div className="space-y-8 py-4 animate-in slide-in-from-bottom-10 duration-500">
+              <div className="flex items-center gap-4"><button onClick={() => setView('dashboard')} className="p-3 bg-gray-50 rounded-2xl active:scale-90 transition-all" style={{ color: colors.forest }}><ArrowLeft size={20} /></button><h2 className="text-2xl font-black" style={{ color: colors.forest }}>Mental Log</h2></div>
+              
+              <div className="p-7 rounded-[40px] space-y-2 border shadow-sm" style={{ backgroundColor: colors.mint + '60', borderColor: colors.mint }}>
+                  <div className="flex items-center gap-2" style={{ color: colors.forest }}><Sparkles size={18} /><p className="text-[11px] font-black uppercase tracking-widest">Mindfulness</p></div>
+                  <p className="text-sm font-semibold leading-relaxed italic text-forest" style={{ color: colors.forest }}>"Consistency is as much about your mind as your movement. How are you today?"</p>
               </div>
-            )}
-          </div>
+
+              {/* MOOD EMOJIS - HIGH CONTRAST COLORS */}
+              <div className="flex justify-around py-4">
+                {[
+                  { id: 'happy', icon: <Smile size={36} />, label: 'Good', hex: colors.emerald },
+                  { id: 'neutral', icon: <Meh size={36} />, label: 'Okay', hex: colors.orange },
+                  { id: 'exhausted', icon: <Frown size={36} />, label: 'Sad', hex: colors.rose }
+                ].map((mood) => (
+                  <button 
+                    key={mood.id} 
+                    onClick={() => setSelectedMood(mood.id)} 
+                    className={`p-6 rounded-[36px] border-2 transition-all shadow-md flex flex-col items-center gap-3 active:scale-95 ${
+                      selectedMood === mood.id ? 'text-white' : 'bg-white text-gray-400 border-gray-100'
+                    }`}
+                    style={{ 
+                      backgroundColor: selectedMood === mood.id ? mood.hex : colors.white,
+                      borderColor: selectedMood === mood.id ? mood.hex : undefined
+                    }}
+                  >
+                      {React.cloneElement(mood.icon, { 
+                        style: { color: selectedMood === mood.id ? colors.mint : undefined } 
+                      })}
+                      <span className={`text-[10px] font-black uppercase tracking-widest ${selectedMood === mood.id ? 'text-white' : 'text-gray-400'}`}>{mood.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              <textarea 
+                value={journalText} 
+                onChange={(e) => setJournalText(e.target.value)} 
+                placeholder='I feel exhausted of my work, will keep up tomorrow!' 
+                className="w-full h-44 p-7 rounded-[40px] bg-gray-50 border-2 border-transparent focus:bg-white outline-none text-sm font-medium leading-relaxed transition-all shadow-inner placeholder:text-gray-300" 
+                style={{ focusBorderColor: colors.forest }}
+              />
+
+              <button 
+                onClick={handleJournalSubmit} 
+                className={`w-full py-6 rounded-[36px] text-white font-black text-xl shadow-2xl active:scale-95 transition-all flex items-center justify-center gap-3 ${!selectedMood ? 'opacity-30' : ''}`}
+                style={{ backgroundColor: !selectedMood ? colors.gray : colors.forest }}
+                disabled={!selectedMood}
+              >
+                  <ShieldCheck size={26} style={{ color: colors.mint }} /> 
+                  <span>Save Reflection</span>
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* NAVIGASI BAWAH */}
+        {/* LOCKED BOTTOM NAVIGATION PANEL - FIXED AT BOTTOM */}
         {isLoggedIn && (
-          <div className="absolute bottom-0 left-0 right-0 px-6 py-6 bg-white bg-opacity-95 backdrop-blur-xl flex justify-around items-center border-t border-gray-100 z-40">
-            <button onClick={() => setView('dashboard')} className={`p-4 rounded-[20px] transition-all ${view === 'dashboard' ? 'scale-110 shadow-sm' : ''}`} style={{ backgroundColor: view === 'dashboard' ? colors.mint : 'transparent' }}><Footprints size={22} style={{ color: view === 'dashboard' ? colors.forest : '#D1D5DB' }} /></button>
-            <button onClick={() => setView('rewards')} className={`p-4 rounded-[20px] transition-all ${view === 'rewards' ? 'scale-110 shadow-sm' : ''}`} style={{ backgroundColor: view === 'rewards' ? colors.mint : 'transparent' }}><Wallet size={22} style={{ color: view === 'rewards' ? colors.forest : '#D1D5DB' }} /></button>
-            <button onClick={() => setView('profile')} className={`p-4 rounded-[20px] transition-all ${view === 'profile' ? 'scale-110 shadow-sm' : ''}`} style={{ backgroundColor: view === 'profile' ? colors.mint : 'transparent' }}><Smile size={22} style={{ color: view === 'profile' ? colors.forest : '#D1D5DB' }} /></button>
+          <div className="absolute bottom-0 left-0 right-0 h-28 bg-white bg-opacity-95 backdrop-blur-xl flex justify-around items-center border-t border-gray-100 z-[300] px-4 pb-4">
+            <button onClick={() => setView('dashboard')} className={`p-4 rounded-[24px] transition-all flex items-center justify-center ${view === 'dashboard' ? 'scale-110 shadow-lg' : ''}`} style={{ backgroundColor: view === 'dashboard' ? colors.mint : 'transparent' }}>
+              <Footprints size={26} style={{ color: view === 'dashboard' ? colors.forest : '#D1D5DB' }} />
+            </button>
+            <button onClick={() => setView('rewards')} className={`p-4 rounded-[24px] transition-all flex items-center justify-center ${view === 'rewards' ? 'scale-110 shadow-lg' : ''}`} style={{ backgroundColor: view === 'rewards' ? colors.mint : 'transparent' }}>
+              <Wallet size={26} style={{ color: view === 'rewards' ? colors.forest : '#D1D5DB' }} />
+            </button>
+            <button onClick={() => setView('profile')} className={`p-4 rounded-[24px] transition-all flex items-center justify-center ${view === 'profile' ? 'scale-110 shadow-lg' : ''}`} style={{ backgroundColor: view === 'profile' ? colors.mint : 'transparent' }}>
+              <Smile size={26} style={{ color: view === 'profile' ? colors.forest : '#D1D5DB' }} />
+            </button>
           </div>
         )}
       </div>
 
-      {/* Modal Sukses */}
+      {/* Success Modal */}
       {showJournalConfirm && (
         <div className="fixed inset-0 z-[500] flex items-center justify-center p-8 bg-black bg-opacity-60 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-white p-10 rounded-[56px] text-center space-y-6 shadow-2xl animate-in zoom-in duration-300 max-w-[300px] border-4" style={{ borderColor: colors.mint }}>
-            <div className="w-20 h-20 bg-opacity-30 rounded-full flex items-center justify-center mx-auto shadow-inner border-2" style={{ backgroundColor: colors.mint, borderColor: colors.mint }}>
-              <ShieldCheck size={40} style={{ color: colors.forest }} />
+          <div className="bg-white p-12 rounded-[64px] text-center space-y-6 shadow-2xl animate-in zoom-in duration-300 max-w-[320px] border-4" style={{ borderColor: colors.mint }}>
+            <div className="w-24 h-24 bg-opacity-30 rounded-full flex items-center justify-center mx-auto shadow-inner border-2" style={{ backgroundColor: colors.mint, borderColor: colors.mint }}>
+              <ShieldCheck size={54} style={{ color: colors.forest }} />
             </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-black tracking-tight" style={{ color: colors.forest }}>Streak Saved!</h3>
-              <p className="text-xs font-medium text-gray-500 leading-relaxed">
-                Consistency saved through mindfulness.
-              </p>
+            <div className="space-y-3">
+              <h3 className="text-3xl font-black tracking-tighter leading-none" style={{ color: colors.forest }}>Streak<br/>Protected!</h3>
+              <p className="text-sm font-medium text-gray-500 leading-relaxed">Athhar, consistency is about mind and body. Day saved!</p>
             </div>
-            <div className="flex items-center gap-2 px-5 py-2.5 rounded-full shadow-lg border mx-auto w-fit" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
-                <Leaf size={14} style={{ color: colors.mint }} />
-                <span className="text-[10px] font-black text-white uppercase tracking-widest">+50 Kita Points</span>
+            <div className="flex items-center gap-2 px-6 py-3 rounded-full shadow-lg border mx-auto w-fit" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
+                <Leaf size={16} style={{ color: colors.mint }} />
+                <span className="text-xs font-black text-white uppercase tracking-widest">+50 Kita Points</span>
             </div>
           </div>
         </div>
@@ -487,7 +481,7 @@ const App = () => {
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #e5e7eb; }
       `}} />
     </div>
   );
