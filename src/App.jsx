@@ -190,32 +190,35 @@ const App = () => {
     const days = Array.from({ length: 28 }, (_, i) => i + 1);
     const dayLabels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     return (
-      <div className="bg-white p-5 rounded-[36px] border border-gray-100 shadow-sm">
+      <div className="bg-white p-6 rounded-[36px] border border-gray-100 shadow-sm">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="font-bold text-md" style={{ color: colors.forest }}>February 2026</h3>
-          <div className="flex gap-3 text-gray-300"><ChevronLeft size={18} /><ChevronRight size={18} /></div>
+          <h3 className="font-bold text-lg text-forest" style={{ color: colors.forest }}>February 2026</h3>
+          <div className="flex gap-4 text-gray-300"><ChevronLeft size={20} /><ChevronRight size={20} /></div>
         </div>
-        <div className="grid grid-cols-7 gap-y-3 text-center mb-4">
-          {dayLabels.map((l, i) => <span key={i} className="text-[9px] font-black text-gray-300 tracking-widest">{l}</span>)}
+        <div className="grid grid-cols-7 gap-y-4 text-center mb-6">
+          {dayLabels.map((l, i) => <span key={i} className="text-[10px] font-black text-gray-300 tracking-widest">{l}</span>)}
           {days.map(d => {
             const hasData = calendarData[d];
             const isSelected = activeDate === d;
             const hasJournal = hasData?.journal != null;
             const hasActivity = hasData?.activities.some(act => act !== 'Mental Log');
             return (
-              <button key={d} onClick={() => setActiveDate(d)} className={`relative flex items-center justify-center w-10 h-10 mx-auto rounded-2xl transition-all duration-300 ${isSelected ? 'shadow-md scale-110 z-10 text-white' : 'hover:bg-gray-50 font-bold'}`} style={{ backgroundColor: isSelected ? colors.forest : 'transparent', color: isSelected ? colors.white : colors.forest }}>
+              <button key={d} onClick={() => setActiveDate(d)} className={`relative flex items-center justify-center w-10 h-10 mx-auto rounded-2xl transition-all duration-300 ${isSelected ? 'shadow-lg scale-110 z-10 text-white' : 'hover:bg-gray-50 font-bold'}`} style={{ backgroundColor: isSelected ? colors.forest : 'transparent', color: isSelected ? colors.white : colors.forest }}>
                 <span className="text-xs">{d}</span>
                 <div className="absolute bottom-1 flex gap-0.5">
-                  {hasActivity && <div className="w-1 h-1 rounded-full ring-1 ring-white" style={{ backgroundColor: colors.emerald }} />}
-                  {hasJournal && <div className="w-1 h-1 rounded-full ring-1 ring-white" style={{ backgroundColor: colors.rose }} />}
+                  {hasActivity && <div className="w-1.5 h-1.5 rounded-full ring-1 ring-white" style={{ backgroundColor: colors.emerald }} />}
+                  {hasJournal && <div className="w-1.5 h-1.5 rounded-full ring-1 ring-white" style={{ backgroundColor: colors.rose }} />}
                 </div>
               </button>
             );
           })}
         </div>
-        <div className="pt-4 border-t border-gray-50 flex gap-4">
-             <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.emerald }} /><span className="text-[9px] font-bold text-gray-400 uppercase">Sport</span></div>
-             <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.rose }} /><span className="text-[9px] font-bold text-gray-400 uppercase">Mental</span></div>
+        <div className="pt-5 border-t border-gray-50">
+          <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 flex items-center gap-1.5"><Info size={12}/> Calendar Logic</p>
+          <div className="flex gap-4">
+             <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: colors.emerald }} /><span className="text-[11px] font-bold text-gray-500">Sport</span></div>
+             <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: colors.rose }} /><span className="text-[11px] font-bold text-gray-500">Mental Log</span></div>
+          </div>
         </div>
       </div>
     );
@@ -225,33 +228,50 @@ const App = () => {
     const data = getDayData(activeDate);
     const hasJournal = data.journal !== null;
     return (
-      <div className="space-y-5 animate-in fade-in duration-500">
+      <div className="space-y-6 animate-in fade-in duration-500">
         <header className="flex justify-between items-center">
-            <div><h1 className="text-2xl font-black" style={{ color: colors.forest }}>Hi, {userName}!</h1><p className="text-xs font-semibold text-gray-400">Balance is the key 🌿</p></div>
-            <div onClick={() => setView('profile')} className="w-10 h-10 rounded-xl bg-white border-2 shadow-sm flex items-center justify-center cursor-pointer active:scale-90 transition-all overflow-hidden" style={{ borderColor: colors.mint }}><User size={20} style={{ color: colors.forest }} /></div>
+            <div><h1 className="text-3xl font-black" style={{ color: colors.forest }}>Hi, {userName}!</h1><p className="text-sm font-semibold text-gray-400">Balance over burnout 🌿</p></div>
+            <div onClick={() => setView('profile')} className="w-12 h-12 rounded-2xl bg-white border-2 border-mint shadow-sm flex items-center justify-center cursor-pointer active:scale-90 transition-all overflow-hidden" style={{ borderColor: colors.mint }}><User size={24} style={{ color: colors.forest }} /></div>
         </header>
+        
         <CalendarSection />
-        <div className="p-4 rounded-[28px] border bg-white flex items-center justify-between shadow-sm" style={{ borderColor: 'rgba(27, 67, 50, 0.05)' }}>
-          <div className="flex items-center gap-3">
-            <div className={`p-2.5 rounded-xl text-white`} style={{ backgroundColor: healthSynced ? colors.forest : '#D1D5DB' }}><Smartphone size={18} /></div>
-            <div><p className="text-xs font-black" style={{ color: colors.forest }}>Apple Health Sync</p><p className="text-[9px] font-bold text-gray-400 uppercase">{healthSynced ? 'Synced just now' : 'Connect required'}</p></div>
+
+        {/* Sync Status Card with Refresh */}
+        <div className="p-5 rounded-[32px] border bg-white flex items-center justify-between shadow-sm" style={{ borderColor: 'rgba(27, 67, 50, 0.05)' }}>
+          <div className="flex items-center gap-4">
+            <div className={`p-3 rounded-2xl text-white`} style={{ backgroundColor: healthSynced ? colors.forest : '#D1D5DB' }}>
+              <Smartphone size={20} />
+            </div>
+            <div>
+              <p className="text-sm font-black" style={{ color: colors.forest }}>Apple Health Sync</p>
+              <p className="text-[10px] font-medium text-gray-400 uppercase tracking-tight">{healthSynced ? 'Synced just now' : 'Permission required'}</p>
+            </div>
           </div>
-          <button onClick={handleSyncToggle} className={`p-1.5 rounded-xl transition-all ${isSyncing ? 'animate-spin' : 'text-gray-300 hover:text-forest'}`} style={{ color: isSyncing ? colors.forest : undefined }}><RefreshCcw size={20} /></button>
+          <button onClick={handleSyncToggle} className={`p-2 rounded-xl transition-all ${isSyncing ? 'animate-spin text-forest' : 'text-gray-300 hover:text-forest active:scale-90'}`}>
+            <RefreshCcw size={22} />
+          </button>
         </div>
-        <div onClick={() => setView('journal')} className="p-5 rounded-[32px] border-2 border-dashed flex items-center gap-4 cursor-pointer hover:bg-opacity-20 transition-all group active:scale-[0.98]" style={{ borderColor: colors.mint, backgroundColor: hasJournal ? colors.mint + '40' : 'transparent' }}>
-            <div className="p-2.5 bg-white rounded-xl shadow-sm group-hover:rotate-12 transition-transform" style={{ color: colors.forest }}>{hasJournal ? <CheckCircle2 size={20} style={{ color: colors.emerald }} /> : <PenLine size={20} />}</div>
-            <div className="flex-1"><p className="text-xs font-black" style={{ color: colors.forest }}>{hasJournal ? "Log Completed" : "Mental Daily Log"}</p><p className="text-[10px] font-medium text-gray-400">How are you feeling today?</p></div>
-            {!hasJournal && <Plus size={16} style={{ color: colors.forest, opacity: 0.3 }} />}
+
+        <div onClick={() => setView('journal')} className="p-6 rounded-[36px] border-2 border-dashed border-mint flex items-center gap-4 cursor-pointer hover:bg-mint hover:bg-opacity-20 transition-all group active:scale-[0.98]">
+            <div className="p-3 bg-white rounded-2xl text-forest shadow-sm group-hover:scale-110 transition-transform">{hasJournal ? <CheckCircle2 size={24} style={{ color: colors.emerald }} /> : <PenLine size={24} />}</div>
+            <div className="flex-1">
+                <p className="text-sm font-black" style={{ color: colors.forest }}>{hasJournal ? "Log Completed" : "Mental Daily Log"}</p>
+                <p className="text-[11px] font-medium text-gray-400 leading-tight">Sync your mind. How are you today?</p>
+            </div>
+            {!hasJournal && <Plus size={20} style={{ color: colors.forest, opacity: 0.3 }} />}
         </div>
-        <div className="bg-white p-6 rounded-[36px] border border-gray-100 shadow-sm relative overflow-hidden">
-            <div className="flex justify-between items-end mb-4 relative z-10">
-                <div><p className="text-[9px] font-black uppercase text-gray-400 mb-0.5">Today's Progress</p><h2 className="text-4xl font-black tracking-tighter" style={{ color: colors.forest }}>{data.steps.toLocaleString()}</h2><p className="text-[9px] font-black uppercase mt-1" style={{ color: colors.emerald }}>Steps Recorded</p></div>
-                <div className="flex flex-col items-end gap-1.5">
-                    <Footprints size={32} style={{ color: colors.forest, opacity: 0.1 }} />
-                    {hasJournal && <span className="bg-rose-50 text-rose-500 text-[8px] font-black px-1.5 py-0.5 rounded-md border border-rose-100">PROTECTED</span>}
+
+        <div className="bg-white p-6 rounded-[36px] border border-gray-100 shadow-sm">
+            <div className="flex justify-between items-end mb-4">
+                <div><p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Today's Progress</p><h2 className="text-4xl font-black text-forest">{data.steps.toLocaleString()}</h2><p className="text-[10px] font-bold text-mint uppercase tracking-tighter" style={{ color: colors.emerald }}>Steps recorded</p></div>
+                <div className="flex flex-col items-end gap-1">
+                    <Footprints size={40} className="text-forest opacity-5" />
+                    {hasJournal && <span className="bg-rose-50 text-rose-500 text-[10px] font-black px-2 py-0.5 rounded-lg border border-rose-100">PROTECTED</span>}
                 </div>
             </div>
-            <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden relative z-10"><div className="h-full transition-all duration-1000 ease-out" style={{ backgroundColor: colors.forest, width: `${Math.min((data.steps/8000)*100, 100)}%` }} /></div>
+            <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full transition-all duration-1000 ease-out" style={{ backgroundColor: colors.forest, width: `${Math.min((data.steps/8000)*100, 100)}%` }} />
+            </div>
         </div>
       </div>
     );
