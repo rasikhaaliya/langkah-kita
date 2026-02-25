@@ -61,7 +61,7 @@ const App = () => {
   const [journalText, setJournalText] = useState("");
   const [selectedMood, setSelectedMood] = useState(null);
 
-  // Hardcoded Colors for High Contrast Visibility
+  // Palet Warna High Contrast (Hardcoded HEX)
   const colors = {
     forest: '#1B4332', 
     mint: '#D8F3DC',   
@@ -127,22 +127,16 @@ const App = () => {
         <div className="w-20 h-20 rounded-[28px] flex items-center justify-center shadow-2xl rotate-3 mb-10" style={{ backgroundColor: colors.forest }}>
           <Footprints size={40} style={{ color: colors.mint }} />
         </div>
-        
-        {/* Perbaikan Spasi: Heading ke garis lebih rapat */}
         <h1 className="text-6xl font-black tracking-tighter leading-none mb-1.5" style={{ color: colors.forest }}>
           Langkah<br />Kita.
         </h1>
-        
-        {/* Garis ke deskripsi lebih rapat */}
         <div className="h-1.5 w-14 rounded-full mb-2" style={{ backgroundColor: colors.mint }} />
-        
         <p className="text-xl font-medium leading-tight text-gray-400 max-w-[240px]">
           Your guilt-free companion for a balanced life.
         </p>
       </div>
 
       <div className="space-y-6">
-        {/* Perbaikan Spasi: Jarak antara deskripsi dan tombol diperlebar */}
         <button 
           onClick={() => setView('auth')} 
           className="w-full py-5 rounded-[32px] text-white font-bold text-lg shadow-xl flex items-center justify-center gap-2 group active:scale-95 transition-all mt-20" 
@@ -158,28 +152,37 @@ const App = () => {
   );
 
   const AuthScreen = () => (
-    <div className="h-full flex flex-col p-10 bg-white animate-in slide-in-from-right-5">
-      <button onClick={() => setView('opening')} className="p-3 w-fit rounded-2xl bg-gray-50 mb-12 active:scale-90 transition-all shadow-sm" style={{ color: colors.forest }}><ArrowLeft size={24} /></button>
-      <div className="mb-12">
-        <h2 className="text-4xl font-black tracking-tight" style={{ color: colors.forest }}>{authMode === 'signup' ? 'Join Us.' : 'Welcome back.'}</h2>
-        <p className="text-gray-400 mt-2 font-medium italic">{authMode === 'signup' ? 'Start your journey with Athhar.' : 'Consistency starts within.'}</p>
+    <div className="h-full flex flex-col p-8 bg-white animate-in slide-in-from-right-5">
+      {/* REVISI: Spasi Header dikurangi agar tidak terlalu turun */}
+      <button onClick={() => setView('opening')} className="p-3 w-fit rounded-2xl bg-gray-50 mb-6 active:scale-90 transition-all shadow-sm" style={{ color: colors.forest }}>
+        <ArrowLeft size={24} />
+      </button>
+
+      <div className="mb-8">
+        <h2 className="text-4xl font-black tracking-tight" style={{ color: colors.forest }}>
+          {authMode === 'signup' ? 'Join Us.' : 'Welcome back.'}
+        </h2>
+        <p className="text-gray-400 mt-1 font-medium italic">
+          {authMode === 'signup' ? 'Start your journey with Athhar.' : 'Consistency starts within.'}
+        </p>
       </div>
-      <form onSubmit={handleAuthSubmit} className="space-y-6">
+
+      <form onSubmit={handleAuthSubmit} className="space-y-5">
         {authMode === 'signup' && (
           <div className="space-y-1.5">
-            <label className="text-[11px] font-black uppercase tracking-widest ml-4 text-gray-400">Full Name</label>
+            <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Full Name</label>
             <input type="text" defaultValue="Athhar" className="w-full py-4 px-6 rounded-[24px] bg-gray-50 border-2 border-transparent focus:border-forest outline-none transition-all font-medium shadow-inner" />
           </div>
         )}
         <div className="space-y-1.5">
-          <label className="text-[11px] font-black uppercase tracking-widest ml-4 text-gray-400">Email Address</label>
+          <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Email Address</label>
           <input type="email" defaultValue="athhar@langkahkita.com" className="w-full py-4 px-6 rounded-[24px] bg-gray-50 border-2 border-transparent focus:border-forest outline-none transition-all font-medium shadow-inner" />
         </div>
         <div className="space-y-1.5">
-          <label className="text-[11px] font-black uppercase tracking-widest ml-4 text-gray-400">Password</label>
+          <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Password</label>
           <input type="password" defaultValue="password123" className="w-full py-4 px-6 rounded-[24px] bg-gray-50 border-2 border-transparent focus:border-forest outline-none transition-all font-medium shadow-inner" />
         </div>
-        <button type="submit" className="w-full py-5 rounded-[32px] text-white font-bold text-lg shadow-xl mt-4 active:scale-95 transition-all bg-forest" style={{ backgroundColor: colors.forest }}>
+        <button type="submit" className="w-full py-5 rounded-[32px] text-white font-bold text-lg shadow-xl mt-4 active:scale-95 transition-all" style={{ backgroundColor: colors.forest }}>
           {authMode === 'signup' ? 'Create Account' : 'Sign In'}
         </button>
       </form>
@@ -216,7 +219,7 @@ const App = () => {
         <div className="pt-5 border-t border-gray-50 flex gap-6">
              <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: colors.emerald }} /><span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Sport</span></div>
              <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: colors.rose }} /><span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Mental Log</span></div>
-        </div>
+          </div>
       </div>
     );
   };
@@ -225,49 +228,42 @@ const App = () => {
     const data = getDayData(activeDate);
     const hasJournal = data.journal !== null;
     return (
-      <div className="space-y-10 animate-in fade-in duration-500 pb-10">
+      <div className="space-y-6 animate-in fade-in duration-500 pb-10">
         <header className="flex justify-between items-center">
-            <div className="space-y-1">
-              <h1 className="text-3xl font-black" style={{ color: colors.forest }}>Hi, {userName}!</h1>
-              <p className="text-sm font-semibold text-gray-400">Balance over burnout 🌿</p>
-            </div>
-            <div onClick={() => setView('profile')} className="w-14 h-14 rounded-2xl bg-white border-2 border-mint shadow-sm flex items-center justify-center cursor-pointer active:scale-90 transition-all overflow-hidden" style={{ borderColor: colors.mint }}><User size={28} style={{ color: colors.forest }} /></div>
+            <div><h1 className="text-3xl font-black" style={{ color: colors.forest }}>Hi, {userName}!</h1><p className="text-sm font-semibold text-gray-400">Balance over burnout 🌿</p></div>
+            <div onClick={() => setView('profile')} className="w-12 h-12 rounded-2xl bg-white border-2 border-mint shadow-sm flex items-center justify-center cursor-pointer active:scale-90 transition-all overflow-hidden" style={{ borderColor: colors.mint }}><User size={24} style={{ color: colors.forest }} /></div>
         </header>
         
         <CalendarSection />
 
-        <div className="p-6 rounded-[32px] border bg-white flex items-center justify-between shadow-sm" style={{ borderColor: 'rgba(27, 67, 50, 0.05)' }}>
+        <div className="p-5 rounded-[32px] border bg-white flex items-center justify-between shadow-sm" style={{ borderColor: 'rgba(27, 67, 50, 0.05)' }}>
           <div className="flex items-center gap-4">
-            <div className={`p-4 rounded-2xl text-white shadow-md`} style={{ backgroundColor: healthSynced ? colors.forest : '#D1D5DB' }}>
-              <Smartphone size={22} />
+            <div className={`p-3 rounded-2xl text-white shadow-md`} style={{ backgroundColor: healthSynced ? colors.forest : '#D1D5DB' }}>
+              <Smartphone size={20} />
             </div>
             <div>
               <p className="text-sm font-black" style={{ color: colors.forest }}>Apple Health Sync</p>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{healthSynced ? 'Synced just now' : 'Connect required'}</p>
+              <p className="text-[10px] font-medium text-gray-400 uppercase tracking-tight">{healthSynced ? 'Synced just now' : 'Connect required'}</p>
             </div>
           </div>
-          <button onClick={handleSyncToggle} className={`p-2 rounded-xl transition-all ${isSyncing ? 'animate-spin text-forest' : 'text-gray-300 hover:text-forest active:scale-90'}`}><RefreshCcw size={24} /></button>
+          <button onClick={handleSyncToggle} className={`p-2 rounded-xl transition-all ${isSyncing ? 'animate-spin text-forest' : 'text-gray-300 hover:text-forest active:scale-90'}`}><RefreshCcw size={22} /></button>
         </div>
 
-        <div onClick={() => setView('journal')} className="p-8 rounded-[40px] border-2 border-dashed border-mint flex items-center gap-5 cursor-pointer hover:bg-mint hover:bg-opacity-20 transition-all group shadow-sm" style={{ backgroundColor: hasJournal ? colors.mint + '40' : 'transparent' }}>
-            <div className="p-4 bg-white rounded-3xl text-forest shadow-md group-hover:rotate-12 transition-transform">{hasJournal ? <CheckCircle2 size={26} style={{ color: colors.emerald }} /> : <PenLine size={26} />}</div>
+        <div onClick={() => setView('journal')} className="p-6 rounded-[36px] border-2 border-dashed border-mint flex items-center gap-4 cursor-pointer hover:bg-mint hover:bg-opacity-20 transition-all group active:scale-[0.98]">
+            <div className="p-3 bg-white rounded-2xl text-forest shadow-sm group-hover:rotate-12 transition-transform">{hasJournal ? <CheckCircle2 size={24} style={{ color: colors.emerald }} /> : <PenLine size={24} />}</div>
             <div className="flex-1">
-                <p className="text-md font-black text-forest">{hasJournal ? "Log Completed" : "Mental Daily Log"}</p>
+                <p className="text-sm font-black text-forest">{hasJournal ? "Log Completed" : "Mental Daily Log"}</p>
                 <p className="text-[11px] font-medium text-gray-400 leading-tight">Sync your mind. How are you today?</p>
             </div>
             {!hasJournal && <Plus size={20} className="text-forest opacity-30" />}
         </div>
 
-        <div className="bg-white p-8 rounded-[40px] border border-gray-100 shadow-sm relative overflow-hidden">
-            <div className="flex justify-between items-end mb-6 relative z-10">
-                <div className="space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-widest text-gray-400">Today's Progress</p>
-                  <h2 className="text-5xl font-black text-forest tracking-tighter">{data.steps.toLocaleString()}</h2>
-                  <p className="text-[11px] font-bold text-mint uppercase tracking-tighter" style={{ color: colors.emerald }}>Steps recorded</p>
-                </div>
+        <div className="bg-white p-6 rounded-[36px] border border-gray-100 shadow-sm">
+            <div className="flex justify-between items-end mb-4">
+                <div><p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Today's Progress</p><h2 className="text-4xl font-black text-forest">{data.steps.toLocaleString()}</h2><p className="text-[10px] font-bold text-mint uppercase tracking-tighter" style={{ color: colors.emerald }}>Steps recorded</p></div>
                 <div className="flex flex-col items-end gap-1">
                     <Footprints size={40} className="text-forest opacity-5" />
-                    {hasJournal && <span className="bg-rose-50 text-rose-500 text-[10px] font-black px-2 py-0.5 rounded-lg border border-rose-100 shadow-sm">PROTECTED</span>}
+                    {hasJournal && <span className="bg-rose-50 text-rose-500 text-[10px] font-black px-2 py-0.5 rounded-lg border border-rose-100">PROTECTED</span>}
                 </div>
             </div>
             <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
@@ -282,58 +278,52 @@ const App = () => {
     const available = rewardsList.filter(r => !r.redeemed);
     const history = rewardsList.filter(r => r.redeemed);
     return (
-      <div className="space-y-10 animate-in fade-in duration-500 pb-20">
-        <h2 className="text-3xl font-black text-forest" style={{ color: colors.forest }}>Rewards Hub</h2>
+      <div className="space-y-8 animate-in fade-in duration-500 pb-20">
+        <h2 className="text-2xl font-black text-forest" style={{ color: colors.forest }}>Rewards Hub</h2>
         
-        {/* WALLET CARD - PEKAT FOREST GREEN */}
-        <div className="p-10 rounded-[50px] text-white shadow-2xl relative overflow-hidden flex justify-between items-center border-[4px] border-white" style={{ backgroundColor: colors.forest }}>
-            <div className="relative z-10 space-y-1">
-                <p className="text-xs font-bold uppercase tracking-widest opacity-60 mb-2">Kita Points Wallet</p>
-                <div className="flex items-center gap-5 pt-1">
-                    <h3 className="text-6xl font-black tracking-tight" style={{ color: colors.white }}>{kitaPoints.toLocaleString()}</h3>
-                    <Wallet size={40} style={{ color: colors.mint }} />
+        {/* WALLET CARD - FOREST GREEN PEKAT */}
+        <div className="p-8 rounded-[44px] text-white shadow-2xl relative overflow-hidden flex justify-between items-center border-4 border-white" style={{ backgroundColor: colors.forest }}>
+            <div className="relative z-10">
+                <p className="text-xs font-bold uppercase tracking-widest opacity-60 mb-1">Kita Points Balance</p>
+                <div className="flex items-center gap-4">
+                    <h3 className="text-5xl font-black tracking-tight" style={{ color: colors.white }}>{kitaPoints.toLocaleString()}</h3>
+                    <Wallet size={36} style={{ color: colors.mint }} />
                 </div>
             </div>
-            <div className="absolute -top-10 -right-10 p-4 opacity-10 rotate-12"><Award size={200} /></div>
+            <div className="absolute top-0 right-0 p-4 opacity-5 rotate-12"><Award size={140} /></div>
         </div>
 
-        <div className="space-y-6">
-            <h3 className="text-[12px] font-black uppercase tracking-widest px-4 text-gray-400">Available Deals</h3>
-            <div className="space-y-5">
-              {available.map(item => (
-                <div key={item.id} className="bg-white p-6 rounded-[40px] border border-gray-100 flex items-center justify-between shadow-sm active:scale-[0.98] transition-all">
-                  <div className="flex items-center gap-5">
-                      <div className="p-4 bg-gray-50 rounded-2xl text-forest shadow-inner">{item.icon}</div>
-                      <div><p className="text-lg font-black mb-1 text-forest">{item.partner}</p><p className="text-xs font-medium text-gray-400">{item.item}</p></div>
-                  </div>
-                  {/* PERBAIKAN: whitespace-nowrap agar "Pts" tidak turun ke bawah */}
-                  <div className="px-5 py-2.5 rounded-2xl text-[12px] font-black shadow-md whitespace-nowrap" style={{ backgroundColor: colors.mint, color: colors.forest }}>
-                    {item.cost} Pts
-                  </div>
+        <div className="space-y-4">
+            <h3 className="text-[10px] font-black uppercase tracking-widest px-2 text-gray-400">Available Deals</h3>
+            {available.map(item => (
+              <div key={item.id} className="bg-white p-5 rounded-[32px] border border-gray-100 flex items-center justify-between shadow-sm active:scale-[0.98] transition-all">
+                <div className="flex items-center gap-4">
+                    <div className="p-3 bg-gray-50 rounded-2xl text-forest shadow-inner" style={{ color: colors.forest }}>{item.icon}</div>
+                    <div><p className="text-sm font-black mb-1" style={{ color: colors.forest }}>{item.partner}</p><p className="text-[10px] font-medium text-gray-400">{item.item}</p></div>
                 </div>
-              ))}
-            </div>
+                {/* FIX: whitespace-nowrap agar PTS tidak turun */}
+                <div className="px-4 py-2 rounded-xl text-xs font-black shadow-sm whitespace-nowrap" style={{ backgroundColor: colors.mint, color: colors.forest }}>{item.cost} Pts</div>
+              </div>
+            ))}
         </div>
 
         {/* SEPARATOR & HISTORY */}
         {history.length > 0 && (
-          <div className="space-y-8 pt-6">
-              <div className="flex items-center gap-6 px-4">
-                <div className="h-[2px] flex-1" style={{ backgroundColor: colors.gray }} />
-                <h3 className="text-[12px] font-black uppercase tracking-widest text-gray-300 flex items-center gap-2">
-                  <History size={18}/> Riwayat Klaim
-                </h3>
-                <div className="h-[2px] flex-1" style={{ backgroundColor: colors.gray }} />
+          <div className="space-y-5 pt-4">
+              <div className="flex items-center gap-4 px-2">
+                <div className="h-[1px] flex-1 bg-gray-200" />
+                <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-300 flex items-center gap-2"><History size={14}/> Riwayat Klaim</h3>
+                <div className="h-[1px] flex-1 bg-gray-200" />
               </div>
               
-              <div className="space-y-4 opacity-50 pb-10">
+              <div className="space-y-3 opacity-60 pb-10">
                 {history.map(item => (
-                    <div key={item.id} className="bg-gray-50 p-6 rounded-[40px] border border-gray-200 flex items-center justify-between shadow-inner">
-                        <div className="flex items-center gap-5">
-                            <div className="p-4 bg-white rounded-2xl text-gray-300 shadow-sm">{item.icon}</div>
-                            <div><p className="text-lg font-bold text-gray-400">{item.partner}</p><p className="text-xs text-gray-400">{item.item}</p></div>
+                    <div key={item.id} className="bg-gray-50 p-5 rounded-[32px] border border-gray-200 flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 bg-white rounded-2xl text-gray-300">{item.icon}</div>
+                            <div><p className="text-sm font-bold text-gray-400">{item.partner}</p><p className="text-[10px] text-gray-400">{item.item}</p></div>
                         </div>
-                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest bg-gray-100 px-3 py-1.5 rounded-lg border border-gray-200">Terpakai</div>
+                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Redeemed</div>
                     </div>
                 ))}
               </div>
@@ -344,58 +334,47 @@ const App = () => {
   };
 
   const ProfileView = () => (
-    <div className="space-y-10 animate-in fade-in duration-500 pb-20">
-      <div className="flex justify-between items-center"><h2 className="text-3xl font-black text-forest">Profile</h2><Settings size={28} className="text-gray-300" /></div>
-      <div className="flex flex-col items-center py-6 space-y-5">
-          <div className="relative">
-            <div className="w-32 h-32 rounded-[44px] border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden" style={{ backgroundColor: colors.forest }}>
-              <User size={56} style={{ color: colors.mint }} />
-            </div>
-            <div className="absolute -bottom-2 -right-2 p-3 bg-white rounded-full shadow-lg border border-gray-50">
-              <ShieldCheck size={24} style={{ color: colors.emerald }} />
-            </div>
-          </div>
-          <div className="text-center space-y-1">
-            <h3 className="text-3xl font-black text-forest">{userName}</h3>
-            <p className="text-[11px] font-black uppercase tracking-widest px-5 py-2 rounded-full inline-block mt-2 shadow-sm" style={{ backgroundColor: colors.forest, color: colors.mint }}>Consistency Sprout 🌱</p>
-          </div>
+    <div className="space-y-8 animate-in fade-in duration-500 pb-20">
+      <div className="flex justify-between items-center"><h2 className="text-2xl font-black text-forest">Profile</h2><Settings size={24} className="text-gray-300" /></div>
+      <div className="flex flex-col items-center py-4 space-y-4">
+          <div className="relative"><div className="w-28 h-28 rounded-[40px] border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden" style={{ backgroundColor: colors.forest }}><User size={48} style={{ color: colors.mint }} /></div><div className="absolute -bottom-2 -right-2 p-2 bg-white rounded-full shadow-lg border border-gray-50"><ShieldCheck size={20} style={{ color: colors.emerald }} /></div></div>
+          <div className="text-center"><h3 className="text-2xl font-black text-forest">{userName}</h3><p className="text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full mt-2" style={{ backgroundColor: colors.forest, color: colors.mint }}>Consistency Sprout 🌱</p></div>
       </div>
-      <div className="bg-white p-8 rounded-[48px] border border-gray-100 shadow-sm space-y-10">
-          <div className="flex items-center gap-4"><Heart size={24} style={{ color: colors.rose }} /><h4 className="text-sm font-black uppercase tracking-widest text-forest">Mental Vitality Trends</h4></div>
-          
-          <div className="flex justify-between items-end h-40 px-2 gap-5">
+      <div className="bg-white p-7 rounded-[40px] border border-gray-100 shadow-sm space-y-8">
+          <div className="flex items-center gap-3"><Heart size={20} style={{ color: colors.rose }} /><h4 className="text-sm font-black uppercase tracking-widest" style={{ color: colors.forest }}>Mental Vitality Trends</h4></div>
+          <div className="flex justify-between items-end h-32 px-2 gap-4">
             {[45, 70, 30, 85, 95, 60, 75].map((h, i) => (
               <div key={i} className="flex-1 flex flex-col items-center h-full justify-end group">
                 <div 
-                  className="w-full rounded-t-xl transition-all duration-700 ease-out border-2 shadow-sm" 
-                  style={{ height: `${h}%`, backgroundColor: colors.mint, borderColor: colors.forest, borderBottom: 'none' }} 
+                  className="w-full rounded-t-xl transition-all duration-700 ease-out border-2" 
+                  style={{ height: `${h}%`, backgroundColor: colors.mint, borderColor: colors.forest, opacity: 0.9, borderBottom: 'none' }} 
                 />
-                <span className="text-[9px] font-black text-gray-400 mt-4 uppercase tracking-tighter">Day {i+1}</span>
+                <span className="text-[9px] font-black text-gray-400 mt-3 uppercase tracking-tighter">D{i+1}</span>
               </div>
             ))}
           </div>
           <p className="text-[11px] text-center italic text-gray-400 font-medium px-4 leading-relaxed">"Balance is the secret to a long and healthy journey."</p>
       </div>
-      <button onClick={() => {setIsLoggedIn(false); setView('opening');}} className="w-full py-6 font-black text-sm bg-rose-50 rounded-[32px] hover:bg-rose-100 transition-colors shadow-sm" style={{ color: colors.rose }}>Sign Out</button>
+      <button onClick={() => {setIsLoggedIn(false); setView('opening');}} className="w-full py-5 font-black text-sm bg-rose-50 rounded-[28px] hover:bg-rose-100 transition-colors" style={{ color: colors.rose }}>Sign Out</button>
     </div>
   );
 
   return (
     <div className="h-screen bg-gray-200 font-sans flex justify-center items-center overflow-hidden">
       
-      {/* MOBILE APP CONTAINER - UKURAN HP TANPA FRAME */}
+      {/* MOBILE APP CONTAINER - TANPA FRAME */}
       <div className="w-full max-w-[420px] h-full bg-white relative flex flex-col shadow-[0_40px_120px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
         
-        {/* Notifikasi Poin Mengambang */}
+        {/* Notifikasi Point */}
         {showPointAnim && (
-          <div className="absolute top-20 right-8 z-[500] animate-bounce text-white px-6 py-3.5 rounded-3xl shadow-2xl flex items-center gap-3 border-2" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
-             <div className="p-1.5 rounded-full shadow-inner" style={{ backgroundColor: colors.mint }}><Plus size={16} style={{ color: colors.forest }} /></div>
+          <div className="absolute top-20 right-8 z-[500] animate-bounce text-white px-5 py-3 rounded-3xl shadow-2xl flex items-center gap-3 border-2" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
+             <div className="p-1.5 rounded-full shadow-inner" style={{ backgroundColor: colors.mint }}><Plus size={14} style={{ color: colors.forest }} /></div>
              <span className="font-black text-sm tracking-tight">+50 Kita Points</span>
           </div>
         )}
 
-        {/* SCROLLABLE MAIN CONTENT */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide bg-white px-8 pt-12 pb-44">
+        {/* SCROLLABLE AREA - PB-32 AGAR TIDAK TERPOTONG NAV */}
+        <div className="flex-1 overflow-y-auto scrollbar-hide bg-white px-8 pt-10 pb-36">
           {view === 'opening' && <OpeningScreen />}
           {view === 'auth' && <AuthScreen />}
           
@@ -408,25 +387,25 @@ const App = () => {
           )}
           
           {view === 'journal' && (
-            <div className="space-y-10 py-4 animate-in slide-in-from-bottom-10 duration-500">
-              <div className="flex items-center gap-6"><button onClick={() => setView('dashboard')} className="p-3 bg-gray-50 rounded-2xl active:scale-90 transition-all shadow-sm" style={{ color: colors.forest }}><ArrowLeft size={24} /></button><h2 className="text-3xl font-black text-forest">Mental Log</h2></div>
+            <div className="space-y-8 py-4 animate-in slide-in-from-bottom-10 duration-500">
+              <div className="flex items-center gap-4"><button onClick={() => setView('dashboard')} className="p-3 bg-gray-50 rounded-2xl active:scale-90 transition-all shadow-sm" style={{ color: colors.forest }}><ArrowLeft size={20} /></button><h2 className="text-2xl font-black" style={{ color: colors.forest }}>Mental Log</h2></div>
               
-              <div className="p-10 rounded-[50px] space-y-3 border-2 border-mint shadow-inner" style={{ backgroundColor: colors.mint + '60' }}>
-                  <div className="flex items-center gap-3" style={{ color: colors.forest }}><Sparkles size={22} /><p className="text-[12px] font-black uppercase tracking-widest">Mindfulness</p></div>
-                  <p className="text-sm font-semibold leading-relaxed italic text-forest">"Taking a moment for your mind is the ultimate form of consistency."</p>
+              <div className="p-7 rounded-[40px] space-y-2 border border-mint shadow-inner" style={{ backgroundColor: colors.mint + '60' }}>
+                  <div className="flex items-center gap-2" style={{ color: colors.forest }}><Sparkles size={18} /><p className="text-[10px] font-black uppercase tracking-widest">Mindfulness</p></div>
+                  <p className="text-sm font-semibold leading-relaxed italic text-forest" style={{ color: colors.forest }}>"Consistency is as much about your mind as your movement. How are you today?"</p>
               </div>
 
               {/* MOOD EMOJI SELECTOR */}
               <div className="flex justify-around py-4">
                 {[
-                  { id: 'happy', icon: <Smile size={44} />, label: 'Good', hex: colors.emerald },
-                  { id: 'neutral', icon: <Meh size={44} />, label: 'Okay', hex: colors.orange },
-                  { id: 'sad', icon: <Frown size={44} />, label: 'Sad', hex: colors.rose }
+                  { id: 'happy', icon: <Smile size={40} />, label: 'Good', hex: colors.emerald },
+                  { id: 'neutral', icon: <Meh size={40} />, label: 'Okay', hex: colors.orange },
+                  { id: 'exhausted', icon: <Frown size={40} />, label: 'Sad', hex: colors.rose }
                 ].map((mood) => (
                   <button 
                     key={mood.id} 
                     onClick={() => setSelectedMood(mood.id)} 
-                    className={`p-8 rounded-[44px] border-2 transition-all shadow-lg flex flex-col items-center gap-4 active:scale-95 ${
+                    className={`p-7 rounded-[44px] border-2 transition-all shadow-md flex flex-col items-center gap-3 active:scale-95 ${
                       selectedMood === mood.id ? 'text-white shadow-xl scale-110' : 'bg-white text-gray-400 border-gray-100'
                     }`}
                     style={{ 
@@ -437,7 +416,7 @@ const App = () => {
                       {React.cloneElement(mood.icon, { 
                         style: { color: selectedMood === mood.id ? colors.mint : undefined } 
                       })}
-                      <span className={`text-[11px] font-black uppercase tracking-widest ${selectedMood === mood.id ? 'text-white' : 'text-gray-400'}`}>{mood.label}</span>
+                      <span className={`text-[10px] font-black uppercase tracking-widest ${selectedMood === mood.id ? 'text-white' : 'text-gray-400'}`}>{mood.label}</span>
                   </button>
                 ))}
               </div>
@@ -446,52 +425,53 @@ const App = () => {
                 value={journalText} 
                 onChange={(e) => setJournalText(e.target.value)} 
                 placeholder='I feel exhausted of my work, will keep up tomorrow!' 
-                className="w-full h-48 p-8 rounded-[44px] bg-gray-50 border-2 border-transparent focus:bg-white focus:border-forest outline-none text-md font-medium leading-relaxed transition-all shadow-inner placeholder:text-gray-400" 
+                className="w-full h-44 p-7 rounded-[40px] bg-gray-50 border-2 border-transparent focus:bg-white outline-none text-sm font-medium leading-relaxed transition-all shadow-inner placeholder:text-gray-400" 
+                style={{ focusBorderColor: colors.forest }}
               />
 
               <button 
                 onClick={handleJournalSubmit} 
-                className={`w-full py-7 rounded-[40px] text-white font-black text-xl shadow-2xl active:scale-95 transition-all flex items-center justify-center gap-4 ${!selectedMood ? 'opacity-30 cursor-not-allowed' : ''}`}
-                style={{ backgroundColor: !selectedMood ? colors.gray : colors.forest }}
+                className={`w-full py-6 rounded-[32px] text-white font-black text-xl shadow-2xl active:scale-95 transition-all flex items-center justify-center gap-3 ${!selectedMood ? 'opacity-30 cursor-not-allowed' : 'bg-forest'}`}
+                style={{ backgroundColor: !selectedMood ? '#D1D5DB' : colors.forest }}
                 disabled={!selectedMood}
               >
-                  <ShieldCheck size={32} style={{ color: colors.mint }} /> 
+                  <ShieldCheck size={26} style={{ color: colors.mint }} /> 
                   <span>Save Reflection</span>
               </button>
             </div>
           )}
         </div>
 
-        {/* FIXED BOTTOM NAVIGATION PANEL - LOCKED AT BOTTOM */}
+        {/* LOCKED BOTTOM NAVIGATION PANEL - TETAP DI BAWAH */}
         {isLoggedIn && (
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-white bg-opacity-95 backdrop-blur-2xl flex justify-around items-center border-t border-gray-100 z-[600] px-8 pb-8 shadow-[0_-15px_50px_rgba(0,0,0,0.08)]">
-            <button onClick={() => setView('dashboard')} className={`p-5 rounded-[28px] transition-all flex items-center justify-center ${view === 'dashboard' ? 'scale-110 shadow-2xl' : 'hover:bg-gray-50'}`} style={{ backgroundColor: view === 'dashboard' ? colors.mint : 'transparent' }}>
-              <Footprints size={28} style={{ color: view === 'dashboard' ? colors.forest : '#D1D5DB' }} />
+          <div className="absolute bottom-0 left-0 right-0 h-28 bg-white bg-opacity-95 backdrop-blur-xl flex justify-around items-center border-t border-gray-100 z-[600] px-6 pb-6 shadow-[0_-15px_40px_rgba(0,0,0,0.05)]">
+            <button onClick={() => setView('dashboard')} className={`p-4 rounded-[20px] transition-all flex items-center justify-center ${view === 'dashboard' ? 'scale-110 shadow-lg' : ''}`} style={{ backgroundColor: view === 'dashboard' ? colors.mint : 'transparent' }}>
+              <Footprints size={26} style={{ color: view === 'dashboard' ? colors.forest : '#D1D5DB' }} />
             </button>
-            <button onClick={() => setView('rewards')} className={`p-5 rounded-[28px] transition-all flex items-center justify-center ${view === 'rewards' ? 'scale-110 shadow-2xl' : 'hover:bg-gray-50'}`} style={{ backgroundColor: view === 'rewards' ? colors.mint : 'transparent' }}>
-              <Wallet size={28} style={{ color: view === 'rewards' ? colors.forest : '#D1D5DB' }} />
+            <button onClick={() => setView('rewards')} className={`p-4 rounded-[20px] transition-all flex items-center justify-center ${view === 'rewards' ? 'scale-110 shadow-lg' : ''}`} style={{ backgroundColor: view === 'rewards' ? colors.mint : 'transparent' }}>
+              <Wallet size={26} style={{ color: view === 'rewards' ? colors.forest : '#D1D5DB' }} />
             </button>
-            <button onClick={() => setView('profile')} className={`p-5 rounded-[28px] transition-all flex items-center justify-center ${view === 'profile' ? 'scale-110 shadow-2xl' : 'hover:bg-gray-50'}`} style={{ backgroundColor: view === 'profile' ? colors.mint : 'transparent' }}>
-              <Smile size={28} style={{ color: view === 'profile' ? colors.forest : '#D1D5DB' }} />
+            <button onClick={() => setView('profile')} className={`p-4 rounded-[24px] transition-all flex items-center justify-center ${view === 'profile' ? 'scale-110 shadow-lg' : ''}`} style={{ backgroundColor: view === 'profile' ? colors.mint : 'transparent' }}>
+              <Smile size={26} style={{ color: view === 'profile' ? colors.forest : '#D1D5DB' }} />
             </button>
           </div>
         )}
       </div>
 
-      {/* Confirmation Popup Modal */}
+      {/* Confirmation Modal */}
       {showJournalConfirm && (
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-10 bg-black bg-opacity-70 backdrop-blur-md animate-in fade-in">
-          <div className="bg-white p-14 rounded-[70px] text-center space-y-8 shadow-2xl animate-in zoom-in duration-300 max-w-[360px] border-[6px] border-mint">
-            <div className="w-24 h-24 bg-mint bg-opacity-40 rounded-full flex items-center justify-center mx-auto shadow-inner border-2 border-mint">
-              <ShieldCheck size={60} style={{ color: colors.forest }} />
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-8 bg-black bg-opacity-50 backdrop-blur-md animate-in fade-in">
+          <div className="bg-white p-10 rounded-[56px] text-center space-y-6 shadow-2xl animate-in zoom-in duration-300 max-w-[320px] border-4" style={{ borderColor: colors.mint }}>
+            <div className="w-20 h-20 bg-opacity-30 rounded-full flex items-center justify-center mx-auto shadow-inner border-2" style={{ backgroundColor: colors.mint, borderColor: colors.mint }}>
+              <ShieldCheck size={40} style={{ color: colors.forest }} />
             </div>
-            <div className="space-y-4">
-              <h3 className="text-4xl font-black text-forest tracking-tighter leading-none">Streak<br/>Protected!</h3>
-              <p className="text-sm font-medium text-gray-500 leading-relaxed px-4">Well done, Athhar. Consistency is about mind and body. Day saved!</p>
+            <div className="space-y-2">
+              <h3 className="text-2xl font-black tracking-tight" style={{ color: colors.forest }}>Streak Saved!</h3>
+              <p className="text-xs font-medium text-gray-500 leading-relaxed px-4">Well done, {userName}. Consistency is about mind and body. Day saved!</p>
             </div>
-            <div className="flex items-center gap-3 px-8 py-4 rounded-full shadow-lg border mx-auto w-fit" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
-                <Leaf size={18} style={{ color: colors.mint }} />
-                <span className="text-sm font-black text-white uppercase tracking-widest">+50 Kita Points</span>
+            <div className="flex items-center gap-2 px-6 py-3 rounded-full shadow-lg border mx-auto w-fit" style={{ backgroundColor: colors.forest, borderColor: colors.mint }}>
+                <Leaf size={16} style={{ color: colors.mint }} />
+                <span className="text-[11px] font-black text-white uppercase tracking-widest">+50 Kita Points</span>
             </div>
           </div>
         </div>
@@ -501,7 +481,7 @@ const App = () => {
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f3f4f6; overflow: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #e5e7eb; }
       `}} />
     </div>
   );
